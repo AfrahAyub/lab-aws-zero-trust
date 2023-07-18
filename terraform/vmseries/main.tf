@@ -1,4 +1,8 @@
-provider "aws" {}
+provider "aws" {
+  #access_key = ""
+  #secret_key = ""
+  #region     = ""
+}
 
 module "vulnerable-vpc" {
     source           = "../modules/vpc"
@@ -32,7 +36,7 @@ module "security-vpc" {
     nat_gateways    = var.nat_gateways
     global_tags     = var.global_tags
 }
-
+/*
 module "management-vpc" {
   source          = "../modules/vpc"
   vpc             = var.management-vpc
@@ -53,7 +57,7 @@ module "panorama" {
   prefix-name-tag = var.prefix-name-tag
   global_tags     = var.global_tags
 }
-
+*/
 module "vm-series" {
   source            = "../modules/vm-series"
   fw_product_code   = var.fw_product_code
@@ -66,7 +70,7 @@ module "vm-series" {
   subnet_ids        = module.security-vpc.subnet_ids
   security_groups   = module.security-vpc.security_groups
   bootstrap_options = var.firewall-bootstrap_options
-  panorama_ip       = module.panorama.PANORAMA_IP_ADDRESS
+  panorama_ip       = ""      #module.panorama.PANORAMA_IP_ADDRESS
   global_tags       = var.global_tags
 }
 
@@ -75,7 +79,7 @@ locals {
     "${module.vulnerable-vpc.vpc_details.name}"  : module.vulnerable-vpc.vpc_details,
     "${module.attack-vpc.vpc_details.name}"      : module.attack-vpc.vpc_details,
     "${module.security-vpc.vpc_details.name}"    : module.security-vpc.vpc_details,
-    "${module.management-vpc.vpc_details.name}"  : module.management-vpc.vpc_details
+    #"${module.management-vpc.vpc_details.name}"  : module.management-vpc.vpc_details
   }
 }
 
@@ -103,7 +107,7 @@ module "transit-gateway" {
 
 module "vpc-routes" {
   source          = "../modules/vpc_routes"
-  vpc-routes      = merge(var.vulnerable-vpc-routes, var.attack-vpc-routes, var.security-vpc-routes, var.management-vpc-routes)
+  vpc-routes      = merge(var.vulnerable-vpc-routes, var.attack-vpc-routes, var.security-vpc-routes)    #, var.management-vpc-routes)
   vpcs            = local.vpcs
   tgw-ids         = module.transit-gateway.tgw-ids
   ngfw-data-eni   = module.vm-series.ngfw-data-eni
@@ -111,11 +115,11 @@ module "vpc-routes" {
   natgw_ids       = module.security-vpc.natgw_ids
   prefix-name-tag = var.prefix-name-tag
 }
-
+/*
 output "PANORAMA_IP_ADDRESS" {
   value = module.panorama.PANORAMA_IP_ADDRESS
 }
-
+*/
 output "FIREWALL_IP_ADDRESS" {
   value = module.vm-series.firewall-ip
 }

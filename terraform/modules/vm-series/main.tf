@@ -4,7 +4,7 @@ locals {
     "panorama-server"     = var.panorama_ip
   }
 
-  bootstrap_options = merge(var.bootstrap_options, local.panorama_ip_bootstrap)
+  bootstrap_options = merge(var.bootstrap_options)      #, local.panorama_ip_bootstrap)
 }
 
 data "aws_ami" "pa-vm" {
@@ -34,7 +34,7 @@ resource "aws_network_interface" "this" {
 
 resource "aws_eip" "elasticip" {
   network_interface = aws_network_interface.this["vmseries01-mgmt"].id
-  vpc = true
+  #vpc = true
 }
 
 resource "aws_instance" "vm-series" {
