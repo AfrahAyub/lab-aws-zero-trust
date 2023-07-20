@@ -36,28 +36,7 @@ module "security-vpc" {
     nat_gateways    = var.nat_gateways
     global_tags     = var.global_tags
 }
-/*
-module "management-vpc" {
-  source          = "../modules/vpc"
-  vpc             = var.management-vpc
-  prefix-name-tag = var.prefix-name-tag
-  subnets         = var.management-vpc-subnets
-  route-tables    = var.management-vpc-route-tables
-  security-groups = var.management-vpc-security-groups
-  global_tags     = var.global_tags
-}
 
-module "panorama" {
-  source          = "../modules/panorama"
-  vpc-name        = module.management-vpc.vpc_name
-  subnet-ids      = module.management-vpc.subnet_ids
-  security-groups = module.management-vpc.security_groups
-  ssh-key-name    = module.management-vpc.ssh_key_name
-  panorama        = var.panorama
-  prefix-name-tag = var.prefix-name-tag
-  global_tags     = var.global_tags
-}
-*/
 module "vm-series" {
   source            = "../modules/vm-series"
   fw_product_code   = var.fw_product_code
@@ -70,7 +49,6 @@ module "vm-series" {
   subnet_ids        = module.security-vpc.subnet_ids
   security_groups   = module.security-vpc.security_groups
   bootstrap_options = var.firewall-bootstrap_options
-  panorama_ip       = ""      #module.panorama.PANORAMA_IP_ADDRESS
   global_tags       = var.global_tags
 }
 
@@ -78,8 +56,7 @@ locals {
   vpcs = {
     "${module.vulnerable-vpc.vpc_details.name}"  : module.vulnerable-vpc.vpc_details,
     "${module.attack-vpc.vpc_details.name}"      : module.attack-vpc.vpc_details,
-    "${module.security-vpc.vpc_details.name}"    : module.security-vpc.vpc_details,
-    #"${module.management-vpc.vpc_details.name}"  : module.management-vpc.vpc_details
+    "${module.security-vpc.vpc_details.name}"    : module.security-vpc.vpc_details
   }
 }
 
@@ -115,11 +92,7 @@ module "vpc-routes" {
   natgw_ids       = module.security-vpc.natgw_ids
   prefix-name-tag = var.prefix-name-tag
 }
-/*
-output "PANORAMA_IP_ADDRESS" {
-  value = module.panorama.PANORAMA_IP_ADDRESS
-}
-*/
+
 output "FIREWALL_IP_ADDRESS" {
   value = module.vm-series.firewall-ip
 }

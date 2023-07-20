@@ -1,10 +1,11 @@
 
 locals {
-  panorama_ip_bootstrap = {
-    "panorama-server"     = var.panorama_ip
+
+  bootstrap_params = {
+    "vmseries-bootstrap-aws-s3bucket" = aws_s3_bucket.bootstrap_bucket_ngfw.id
   }
 
-  bootstrap_options = merge(var.bootstrap_options)      #, local.panorama_ip_bootstrap)
+  bootstrap_options = merge(var.bootstrap_options, local.bootstrap_params)
 }
 
 data "aws_ami" "pa-vm" {
@@ -20,6 +21,108 @@ data "aws_ami" "pa-vm" {
     name   = "name"
     values = ["PA-VM-AWS-${var.fw_version}*"]
   }
+}
+
+resource "random_string" "randomstring" {
+  length      = 25
+  min_lower   = 15
+  min_numeric = 10
+  special     = false
+}
+
+resource "aws_s3_bucket" "bootstrap_bucket_ngfw" {
+  bucket        = "${join("", tolist(["aws-gwlb-vm-series-bootstrap", "-", random_string.randomstring.result]))}"
+  acl           = "private"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_public_access_block" "example" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  block_public_acls   = false
+  block_public_policy = false
+}
+
+resource "aws_s3_bucket_object" "bootstrap_xml" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  acl    = "private"
+  key    = "config/bootstrap.xml"
+  source = "../modules/bootstrap_files/bootstrap.xml"
+}
+
+resource "aws_s3_bucket_object" "init-cft_txt" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  acl    = "private"
+  key    = "config/init-cfg.txt"
+  source = "../modules/bootstrap_files/init-cfg.txt"
+}
+
+resource "aws_s3_bucket_object" "software" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  acl    = "private"
+  key    = "software/"
+  source = "/dev/null"
+}
+
+resource "aws_s3_bucket_object" "license" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  acl    = "private"
+  key    = "license/authcodes"
+  source = "/dev/null"
+}
+
+resource "aws_s3_bucket_object" "content" {
+  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
+  acl    = "private"
+  key    = "content/"
+  source = "/dev/null"
+}
+
+resource "aws_iam_role" "bootstrap_role" {
+  name = "ngfw_bootstrap_role"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+      "Service": "ec2.amazonaws.com"
+    },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "bootstrap_policy" {
+  name = "ngfw_bootstrap_policy"
+  role = "${aws_iam_role.bootstrap_role.id}"
+
+  policy = <<EOF
+{
+  "Version" : "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::${aws_s3_bucket.bootstrap_bucket_ngfw.id}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::${aws_s3_bucket.bootstrap_bucket_ngfw.id}/*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_instance_profile" "bootstrap_profile" {
+  name = "ngfw_bootstrap_profile"
+  role = aws_iam_role.bootstrap_role.name
+  path = "/"
 }
 
 resource "aws_network_interface" "this" {
@@ -39,13 +142,16 @@ resource "aws_eip" "elasticip" {
 
 resource "aws_instance" "vm-series" {
   for_each = { for firewall in var.firewalls: firewall.name => firewall }
-  ami           = data.aws_ami.pa-vm.id
-  instance_type = each.value.instance_type
+
+  ami                   = data.aws_ami.pa-vm.id
+  instance_type         = each.value.instance_type
+  ebs_optimized         = true
+  iam_instance_profile  = aws_iam_instance_profile.bootstrap_profile.id
+
   tags          = merge({ Name = "${var.prefix-name-tag}${each.value.name}" }, var.global_tags)
 
   user_data = base64encode(join(",", compact(concat(
     [for k, v in merge(each.value.bootstrap_options, local.bootstrap_options) : "${k}=${v}"],
-    #[lookup(each.value, "bootstrap_bucket", null) != null ? "vmseries-bootstrap-aws-s3bucket=${var.buckets_map[each.value.bootstrap_bucket].name}" : null],
   ))))
 
   root_block_device {
