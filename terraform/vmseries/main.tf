@@ -46,6 +46,8 @@ module "vm-series" {
   ssh_key_name      = module.security-vpc.ssh_key_name
   prefix-name-tag   = var.prefix-name-tag
   vpc_name          = module.security-vpc.vpc_name
+  vpc_id            = module.security-vpc.vpc_id
+  route_table_ids   = module.security-vpc.vpc_route_tables
   subnet_ids        = module.security-vpc.subnet_ids
   security_groups   = module.security-vpc.security_groups
   bootstrap_options = var.firewall-bootstrap_options

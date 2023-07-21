@@ -36,10 +36,14 @@ resource "aws_s3_bucket" "bootstrap_bucket_ngfw" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket_public_access_block" "example" {
-  bucket = aws_s3_bucket.bootstrap_bucket_ngfw.id
-  block_public_acls   = false
-  block_public_policy = false
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id = var.vpc_id
+  service_name = "com.amazonaws.us-east-1.s3"
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3" {
+  route_table_id = var.route_table_ids["${var.vpc_name}-ngfw-mgmt-rt"]
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
 }
 
 resource "aws_s3_bucket_object" "bootstrap_xml" {
