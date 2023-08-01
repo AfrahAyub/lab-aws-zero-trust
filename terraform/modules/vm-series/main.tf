@@ -23,6 +23,13 @@ data "aws_ami" "pa-vm" {
   }
 }
 
+data "aws_region" "current" {}
+
+data "aws_service" "s3" {
+  region = data.aws_region.current.name
+  service_id = "s3"
+}
+
 resource "random_string" "randomstring" {
   length      = 25
   min_lower   = 15
@@ -38,7 +45,7 @@ resource "aws_s3_bucket" "bootstrap_bucket_ngfw" {
 
 resource "aws_vpc_endpoint" "s3" {
   vpc_id = var.vpc_id
-  service_name = "com.amazonaws.us-east-1.s3"
+  service_name = data.aws_service.s3.reverse_dns_name
 }
 
 resource "aws_vpc_endpoint_route_table_association" "s3" {
