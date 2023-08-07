@@ -138,11 +138,11 @@ resource "aws_security_group" "this" {
 
 data "aws_ami" "latest_ecs" {
   most_recent = true
-  owners = ["591542846629"] # AWS
+  owners = ["137112412989"] # AWS
 
   filter {
       name   = "name"
-      values = ["*amazon-ecs-optimized"]
+      values = ["amzn2-ami-hvm-*-gp2"]
   }
 
   filter {
