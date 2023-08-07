@@ -1,8 +1,3 @@
-provider "aws" {
-  #access_key = ""
-  #secret_key = ""
-  #region     = ""
-}
 
 module "vulnerable-vpc" {
     source           = "../modules/vpc"
@@ -93,16 +88,4 @@ module "vpc-routes" {
   gwlbe_ids       = module.gwlb.gwlbe_ids
   natgw_ids       = module.security-vpc.natgw_ids
   prefix-name-tag = var.prefix-name-tag
-}
-
-output "FIREWALL_IP_ADDRESS" {
-  value = module.vm-series.firewall-ip
-}
-
-output "VULNERABLE_APP_SERVER" {
-  value = module.vulnerable-vpc.instance_ips["vul-app-server"]
-}
-
-output "ATTACK_APP_SERVER" {
-  value = module.attack-vpc.instance_ips["att-app-server"]
 }
