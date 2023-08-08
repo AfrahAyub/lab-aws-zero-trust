@@ -1,5 +1,5 @@
 output "FIREWALL_IP_ADDRESS" {
-  value = module.vm-series.firewall-ip
+  value = "https://${module.vm-series.firewall-ip}"
 }
 
 output "VULNERABLE_APP_SERVER" {

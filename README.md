@@ -1,8 +1,8 @@
 ![](https://lh6.googleusercontent.com/X6oOme2LltwAWHYXXhOD_-Ghm2MVYklyNNXfn1u5iKgO1otHIJicZhNplLasCRi83D-pPMFtIxB-MTjC86MCtly45nn4ZtlroqUDjEMNo9ch6RwD8e1Z92mJ75zhg5nXOEPdGdShP3uXAYQB0A)
 
-![](https://lh4.googleusercontent.com/Fs7lRwjN44Y65LvcBAUJeKT0Fcn3hUf5dquMEiBba8eHLdq4csdCcTvFKJmc9ZRQDohRlGkPa3j9lJc-wwSFqoAELUD9OHn5a8sMgoP3aEoRTBQlVnE9PzWl0E2PmGGBEgoH_0tciKxWCU9HzQ)
+# Zero Trust AWS GWLB Demo Guide
 
-# Zero Trust AWS GWLB QwikLab Guide
+![](https://lh4.googleusercontent.com/Fs7lRwjN44Y65LvcBAUJeKT0Fcn3hUf5dquMEiBba8eHLdq4csdCcTvFKJmc9ZRQDohRlGkPa3j9lJc-wwSFqoAELUD9OHn5a8sMgoP3aEoRTBQlVnE9PzWl0E2PmGGBEgoH_0tciKxWCU9HzQ)
 
 # Overview
 
@@ -20,14 +20,9 @@ A Zero Trust implementation should provide security administrators with the visi
 
 - **[VM-Series Virtual Next-Generation Firewalls](https://www.paloaltonetworks.com/prisma/vm-series)**
 
-  - Protect Private Cloud investments
+  - Protect Public Cloud investments
   - Safeguard cloud and virtualized investments with the virtual firewall that pays for itself. VM-Series NGFWs are built for high performance and significant ROI.
   - Detect hard-to-find threats, Stop outbound traffic exfiltration, Protect against lateral movement
-
-- **[Panorama™](https://www.paloaltonetworks.com/network-security/panorama)**
-
-  - Consolidate policy management. Panorama™ network security management simplifies policies across infrastructures and clouds. Seamless integration. Increased oversight.
-  - Panorama can be deployed as a virtual appliance on VMware ESXi™ and vCloud<sup>®</sup> Air, Linux KVM, and Microsoft Hyper-V<sup>®</sup>.
 
 # Application Environment Overview
 
@@ -35,13 +30,13 @@ A Zero Trust implementation should provide security administrators with the visi
 
 **Figure:** Hands on Lab Environment – Achieving Zero Trust Security
 
-For this workshop, we have pre-deployed some components for you.  You will see a VM-Series, Panorama and an Application Virtual Machine and an Attacker VM pre-deployed.  
+For this workshop, we have pre-deployed some components for you.  You will see a VM-Series, an Application Virtual Machine and an Attacker VM pre-deployed.  
 
 ## What You'll Do
 
 - Use Zero Trust Policy on VM-Series to protect your application against Log4j attack 
-- Use Panorama to apply Zero Trust Policy on VM-Series NGFWs
-- Use Panorama to Monitor Logs to see Security activity
+- Apply Zero Trust Policy on VM-Series NGFWs
+- Monitor Logs on the NGFW to see Security activity
 
 ## Launch the lab environment
 
@@ -49,7 +44,7 @@ In this section, we will launch the lab environment. These are the steps that we
 
 - Start the lab on your designated Qwiklab account.
 - Login to the AWS Console using the provided credentials and set up  IAM roles
-- Subscribe to the Palo Alto Networks VM-Series PAYG and Panorama appliances on the AWS Marketplace.
+- Subscribe to the Palo Alto Networks VM-Series PAYG on the AWS Marketplace.
 - Deploy lab environment using Terraform
 
 ## Start qwiklabs lab environment and login to AWS
@@ -153,7 +148,7 @@ Make sure to delete the whole line.
 In this section, we will deploy the AWS Cloud resources required for the purpose of this lab using Terraform. 
 
 19. Click on ‘AWS’ on the top left hand corner to navigate to the primary console.
-20. Make sure that the region is N.Virginia.
+20. Make sure that the region is selected as the one where you would like to deploy the lab resources.
 
 ![](https://lh6.googleusercontent.com/c8hb5NdPy1qe6mIH4QxfhgkJYY1Ms6Tp2WTCPSQanG_dOmzCzNYu0-XPNr740G1fkGJKk1hZPv5uQ29Ne_hfJioy0_iXn0K_H5horukAsLG12bIrqj_9OSOaL50RqkPeTt7pLuFdLI-rohqWIQ)
 
@@ -173,18 +168,6 @@ In this section, we will deploy the AWS Cloud resources required for the purpose
 
 ![](https://lh3.googleusercontent.com/BUgFJyZn4aD21CAlp4S7FeWrqlIK0aIXtrB03inVyMVxw1HnlZDGln4AiCX_h9Xpeb8EDPLR2xRj2A05LQM2g1GVaCFffGRTwsMhEX7GFd5PXBCqxcjlgxJwZbhNqJfqtxTZedy84E3vOUf96A)
 
-23. Subscribe to Panorama.
-
-    1. Click on the link below and the page that opens up, Click on “Continue to Subscribe” and then Click on “Accept Terms”.
-
-    <https://aws.amazon.com/marketplace/pp?sku=eclz7j04vu9lf8ont8ta3n17o>
-
-![](https://lh3.googleusercontent.com/2HJcdCsWPNIgDWSOhmNYJMgqHubasNh_rlrXFaA6FSTNCoiiQ-pCo3OwIJCfGOTb9XyT-1CzHQSn7V-eIhxGnFeNv8KX1lP_JyB1EzI8lK988u1vd3G7nVmTRfIWve3OBN4HMDjMRezQXEkIRg)
-
-![](https://lh3.googleusercontent.com/3GkFo_jbeF4pV6G3DX4ArVeMlDupKYAG_DXZ9WO2l3Ux_qlnKf-KclDfUUqC47eWgp8qvWxejAD58fVwLofw46EQQxI8ceRLOFEvrBHOiiVY23ocXUMuHRZmWwWBLGds3MT1RDdnfN9Xk0nuXg)
-
-24. Wait till Effective date changes from ‘Pending’ to today’s date. This will take a few minutes.
-
 ![](https://lh4.googleusercontent.com/F5dugTsnfjNqsVI6OtoXC_aNYPbjpZQowuPY7zeBTB6p9kxKIvlIitoJ4zQVWI9rQpwQ5p4tkoYGpoW0xxO28QLa-zKjp2jd0t69l9Cy_TSBq88O-nIgC0rcg4PimDwhElREXgxJTViHykLeRQ)
 
 25. From the AWS management Console, launch CloudShell using the icon on the top right side of the console.
@@ -202,18 +185,12 @@ It takes around a minute for cloudshell to launch and to get the prompt as shown
 27. After the cloudshell is launched, we will start by cloning the following github repository:
 
 ```
-git clone https://github.com/PaloAltoNetworks/lab-aws-zero-trust.git
+git clone https://github.com/PaloAltoNetworks/lab-aws-zero-trust.git && cd lab-aws-zero-trust
 ```
 
 ![](https://lh6.googleusercontent.com/j_sOgBaZFZ0-Y2hhwoO9RPJtWx5ACjj6SChcRG1MhiRmK94zBpVtkG__MUT_szGjB3VhlaLL9zUG1RneRlV7UWY45gdgXGrqiuUHQu20vzsX5p06QcOYqXCxmA04xfYiN4UMtIBfURCeMi4lnQ)
 
 **Figure:** Example of cloning the GitHub repository
-
-28. Change current directory to git repositories’ root directory:
-
-```
-cd panw-zero-trust-aws
-```
 
 29. Run the setup script:
 
@@ -272,56 +249,15 @@ In the lab, there are two virtual machines deployed - ‘**vul-app-server**’ a
 
 We will be using the user ‘ec2-user’ as the username to login to these applications.
 
-#### Using the PEM file
-
-36. Launch terminal on your MAC.
-37. Navigate to the folder where the pem keys were downloaded to.
-
-```
-cd ~/Downloads
-```
-
-38. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below
-
-```
-chmod 400 qwikLABS-\*\*\*\*.pem
-```
-
-39. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below.  Username is ‘ec2-user’. IP Address is the public IP address of the ‘qwikLABS-vul-app-server’ that we noted in the previous step.
-
-```
-ssh -i qwikLABS-L\*\*\*\*.pem ec2-user@<vul-app-public-ip>
-```
-
-For example:
-
-![](https://lh6.googleusercontent.com/ulQz4of2Lfn1iAsbmy9J4YXfXg3_UkbeEx7tRrjHu8uZJqTX6yQ5NTRUlzuKNvSYuwGldLCo6_8wOmUeBIrTsvBffE3Zf68iGRh5x34_UqlJe4fKgEN1rWlKYBKfBeGza0x4iyagGTlJO9jhoA)
-
-#### Using the PPK file
-
-If you are using PuTTY to connect to the servers, after opening the putty, 
-
-40. On the Category menu on the left, expand SSH and click on Auth.
-41. In the field to select the Private key file for authentication, browse for the downloaded PPK file and select it.
-
-![](https://lh3.googleusercontent.com/aAAvPXmenQ-cHpAP6BzLKgKM6tXguUbnSkLc427HE8J8UsNSl9TlM4E2Q7TxQTGKRsF6B-BXpd2R6tbmLP1tmoj9v9B8NSGmqpOMCCz7RmQNc676n5Lmo088qYnHiUiVkNH4O-0uk2kyaHxxzA)
-
-42. Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
-43. Click “Open” to connect to the server.
-
-![](https://lh4.googleusercontent.com/wmz5MlxioKGCl8qp_kP9XFMkw-TPGuz6BvKrFsxolNeKNBUo5wDvDVoPMOX6OQlUyoIw4UX579VHkBdtpeA740jsXqawYvtaK2u32kj9K04MEw1HXCAl7qfOtQD7wKZ75Qbgg9nuFEpc_01W1g)
-
 ### Set up the Vulnerable application server
 
-44. Use the following command to start the container application at the prompt. This will be launching an application that is vulnerable to Log4j.
+36. Navigate to the AWS CloudShell and run the below command to log in to the FTP Client on the AWS environment.
 
 ```
-sudo docker container run -itd --rm --name vul-app-1 -p 8080:8080 us.gcr.io/panw-gcp-team-testing/qwiklab/pcc-log4shell/l4s-demo-app:1.0
+aws ec2-instance-connect ssh --instance-id $(aws ec2 describe-instances --filters "Name=tag:Name,Values=qwikLABS-vul-app-server" --query 'Reservations[].Instances[].[InstanceId]' --output text)
 ```
 
-For example:
-
-![](https://lh6.googleusercontent.com/RNYmX5IMcECtBirPCD3xbdxthplAA_NY6xDkR5WeBZYBuItJ0TydJC8IQQI834ss8cA7iQVMUTagypnIBnojzEt7Gv35Q2AkKpcf5ry_BZAClcIbhlvX76Py3U4QICf1zpbDeEQ36qZfuw-ZVA)
+__Note:__ You can also connect to the AWS EC2 instances using other methods as described in the [Appendix](#connecting_to_aws)
 
 45. Verify that the app is running by running the below command.
 
@@ -348,62 +284,21 @@ sudo docker exec -it vul-app-1 /bin/sh -c 'ping att-svr'
 
 ### Set up the Attack application server
 
-48. SSH to the ‘qwikLABS-att-app-server’ using one of the following methods
-
-    1. If you are using a PEM file to connect, substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below. Username is ‘ec2-user’, IP Address is the public IP address of the ‘qwikLABS-att-app-server’ that we noted in the previous step.
-
-    ```
-    ssh -i qwikLABS-L\*\*\*\*.pem ec2-user@<att-server-public-ip>
-    ```
-
-    For example:
-
-    ![](https://lh3.googleusercontent.com/_j3bTaHKjN6pTXPc7WQTWBqGSZWN8CUkjBdzvoQyr6Yrz8OFJcuKINqbtHpnf4qzBtFvCNnvmkw_o1fWx77s86hKpJTzkt0Ofwpb1La1VMBizfUMLh1TYzTdevKCVPbJpAeaDJp-HfrQ60revA)
-
-    2. If you are using a PPK file to connect, connect to ‘qwikLABS-att-app-server’ using putty as you did in a previous step when connecting to the vulnerable app server. 
-
-49. Execute the below command.
+48. Now run the below command to log in to the FTP Client on the AWS environment.
 
 ```
-sudo docker container run -itd --rm --name att-svr -p 8888:8888 -p 1389:1389 us.gcr.io/panw-gcp-team-testing/qwiklab/pcc-log4shell/l4s-demo-svr:1.0
+aws ec2-instance-connect ssh --instance-id $(aws ec2 describe-instances --filters "Name=tag:Name,Values=qwikLABS-att-app-server" --query 'Reservations[].Instances[].[InstanceId]' --output text)
 ```
 
-For example:
+__Note:__ You can also connect to the AWS EC2 instances using other methods as described in the [Appendix](#connecting_to_aws)
 
-![](https://lh4.googleusercontent.com/5-XXyq06U_McwyBvo84BbsPWE7vRhzf3h1Kn2vI98OUnjbkPvDC-IqrRI-VBVqbp1DQ7M2gMtveL-bCdvyg4zE1BeF7pBGiHkjtFpjK2fOQmG7lzR5T30jixGLX2gV9Eky0ckM99zcajeUBPFQ)
+49. Execute the below command to verify that the app is running.
 
 ```
 sudo docker container list -a
 ```
 
 **![](https://lh5.googleusercontent.com/7cyUWWjUPpH3cKD_oyUbaCLqakdx6R7TMTfwqofEH8aAYuAZtbd_kBp8500TmnhePrAsCNeTNrh4NAgKkecsHA-bT2sdE460w-1fVKibRN0yGwYlSbZYOUoAY8FH_JTJ67q_6CLyEE3kh2Q-lQ)**
-
-## Log in to Panorama
-
-50. On AWS console search on EC2 and click on EC2
-
-![](https://lh6.googleusercontent.com/VRJbXqBg_LeeEgndky_IJ76XYkEEyqiSDn0NE7gO9e_nBPqL8uBOJYnCxoZBVumdXtQKi7jJlrZHIgbFoSLe633PYbiygiJkc-6t86aUUCrkmAc9qZKWJjKNc2a3O8cFUMegbLSY7QELX0oyRA)
-
-51. Copy the public IP of Panorama Instance.
-
-![](https://lh3.googleusercontent.com/mCoeSGnlUNEbILAYRgJ_tm6NNRbQyof33rVzRlaYO1QUh8RoAILclccC2wzkoFBIbbRNASDtn7P8gIjeiW0j3PjGxPLmzYx9MpTMmHOKqeQtPZMiWVqa0Vsodq0tW62at3-Md4t6BJeOv-_Ljw)
-
-52. Launch Panorama on a new browser tab by typing the following on the address bar. Replace &lt;panorama_public_ip> with the Public IP address of the Panorama instance.
-
-```
-https://<panorama_public_IP>
-```
-
-53. Username: admin
-54. Password: Paloalto@1
-
-![](https://lh4.googleusercontent.com/DuiYwH5TH-mgv8cSqLa20fymSMOvYg9-Y0IzvU9MHsIbD0Sx7YyNjjUueRDiP3Vmq7T2q1Zd4HiBYs5vV_MUUUeDcxWuioZc2MyKDAKoG0MZRuglchpBMrYHcJlFd-uAccc7oT5v3EjunpQIgw)
-
-![](https://lh5.googleusercontent.com/O8qhwPZ_1pR9dLJNoaKLS_8NkiLSQiXsLX0JNluqYhmnVXOB5eckVSYMxhIc2MrSlOOuSPCpdAhR9gYYMPzww1vM5d9Bn_fmB-VCPDrG8f9-S4oV8MaHHebFgdPUEuLRjljbXX6Yx47ucthWLA)
-
-55. Once logged in, navigate to the _Panorama_ tab, Click on _Managed Devices > Summary_ on the vertical tree. Ensure that PA-VM is in _Connected_ state.
-
-![](https://lh5.googleusercontent.com/haIkx7FrTjiVEZsHH2I24GGxMh-FQpU2Za4Z5iQeQ0CGcmPYEhb2jA176dWNRBvfet3PFbFlbVbqU3YfEPqA0uCEkDYI0eEeUGacuZSumnj7NxIYWXkMUKRl2BunQVEVWAkDD_xsm56kCSi5jw)
 
 ## Launch Log4J Attack
 
@@ -417,14 +312,14 @@ https://<panorama_public_IP>
 
 ![](https://lh3.googleusercontent.com/WDxnlTUhxoe3OzRqKcWXDFHj9v9XJoUwV3b9aBu-Zlmt7ldgbpMh5j6OBgQ1FOz5DmM-2jynMDQ-DxANXtriiD4jqDqXbKClyZ_MA5q7eKCSIxCg9TAXznpd7G8PtQLg-M1S8opiRPs4njM_Lw)
 
-58. On your Panorama tab on the browser, navigate to Monitor > Traffic
+58. On the VM-Series UI console, navigate to Monitor > Traffic
 
 ![](https://lh3.googleusercontent.com/HochvmJxXuqNggSg2Q5XJnZhieiT1LtsF9FKBEPqv3fNED7wc7yDF8RmUUS5IvjPtqbrLoISBDWxt2uc-zkodyNvAhKhaKAa3q6c8Vf6flgVn6eLCmfzbqbdgZcv5_tfSWMEjz5y4_w_xWYlQQ) 
 
 59. Notice the 3 sessions associated with a successful Log4J attack.
 
 | Source              | Destination         | Destination Port | Application      |
-| ------------------------------------------------------------------------------- |
+| ------------------- | ------------------- | ---------------- | ---------------- |
 | att-svr(10.2.1.100) | vul-app(10.1.1.100) | 8080             | web              |
 | vul-app(10.1.1.100) | att-svr(10.2.1.100) | 1389             | LDAP             |
 | vul-app(10.1.1.100) | att-svr(10.2.1.100) | 8888             | Malware transfer | 
@@ -459,26 +354,19 @@ In the following section, we will deploy best practices zero trust policies to 
 
 ### Deploy Zero Trust Policy for INBOUND Traffic
 
-62. On the Panorama tab on the browser, navigate to Policies tab. Ensure that you are in _Shared_ Device Group
-
-![](https://lh6.googleusercontent.com/S_gB-8pzYsDMzgtkq97zo657mrCiu1kTrmcEwExQ9spfrQ5_TLsWIAcxvUyW4nIRUPid2Z6vcjplHWVzumd4ksezkROJe7IGmAALMfihsb6hpuAYwhtFuccywn7v99DIrTp80Ma2zTDIoRTuJw)
-
-The policies will look like this.
-
-![](https://lh6.googleusercontent.com/wQPElQS9oCGEfnxRzphLNqs_on3il-NmmEJrPOHgNfTNWIPiP_KDk9b7GIUJ5n5iGJ5kFhOuxVO7bQvCQKKkPb9zrmefjrmelaedWIvyGBlztfP8t3FLVdnxKgR29t4J5AZc5qVTyB3U-wVlUg)
-
-63. Enable _ZT-log4j_BLOCK_INBOUND_
+62. On the VM-Series UI console, navigate to Policies tab.
+63. Enable _ZT-log4j_BLOCK_INBOUND_.
 
 ![](https://lh3.googleusercontent.com/TSlzaEDhOuWhkCIFsW5w1R-YUQ-uvF55NvctN_DjeOiS8P722J_cbbvdSbkaYNEwlP76aEC6TsTx9yxgiGU0qmj-7AB0KtQ2henfxxc_ryH6rPYvohEEFNYaeSTooV7jimnf5SSM0JubVriL0g)
 
-64. On the policy, Click on _ZT-log4j_BLOCK_INBOUND,_ navigate to the ‘Profile’ column and click on the icon shown there. Ensure that ‘Strict’ vulnerability protection profile has been enabled for this policy. 
+64. On the policy, Click on _ZT-log4j_BLOCK_INBOUND,_ navigate to the ‘Profile’ column and click on the icon shown there. Ensure that ‘Strict’ vulnerability protection profile has been enabled for this policy.
 
 ![](https://lh5.googleusercontent.com/xnZaOybfOykgjeoOrsG2NLRBp5jsgJcdEwgfUg3Tmg0J-K7uWvB18GrWj_uTjAyHND8jlRAlpFTWrojNjFBZyzGAkkqkq2QHCgh0ZCo5sUCUEaNvUNYmxoQktznmypI-n81-38E7CeN1dclIvQ)
 
 ![](https://lh6.googleusercontent.com/ajjEtztu3PANIByyY7v90YgGSxalI-k0esOCzY6t102tcoHgWcwTOPp98TW_TnEfHOdKctSWUE0oQsaXho2x2wroBZGT3CWF3Ee-3PhY7Dz5j5E_NAwjVVY02BbZa_Ogjt26wxAaeXaRFY4DZw)
 
 65. Click ‘OK’
-66. Commit the changes and push to device
+66. Commit the changes.
 
 ![](https://lh5.googleusercontent.com/4y0UBE-42_4HySREzVU-wYr5mGKb2I7gGqMGbjUTFZg98QQQgd9ddkSOp7rHm9YpmgTQF-fr09Qvc54vjhgCa6KrOC-efq-pd4c04D8UBDDfpr89JfFN32GQYPguNH8BtReiME3AVccNbP8nzA)
 
@@ -487,16 +375,6 @@ The policies will look like this.
 ![](https://lh6.googleusercontent.com/3DiOnz3Itg0DyW45G0XCEXPCgOCZ4551pWD3fmE4xyMbZxitXIaFPc9LSdvzjzqp3xmAfFxoLyemC2tZxvJ5Z9q87GsSrORMUZxikk1vM2Zc_hhk5ag386LSJBQ0QsU3RjC8qfJTIh32u0xb6g)
 
 67. Wait for status to complete.
-![](https://lh3.googleusercontent.com/QoB9oHT_ZIBcnRMLXT9OroCI9jEKS7HZ3vaGc0OdimDwt8LmdRPbngNz772koXuERGQo4KhuPmSh-rf7pi3D6TRw0Q-xs16go9iy5Y6RgzfSYgTA6BLx52Y1mlW3MsGTGvkXWVYCdfl2GJQh3A)
-    * If you see the message ‘Not all Commit-All jobs got triggered”, close the window.
-    * On the top right, click on Commit again and select ‘Push to Devices’
-    ![](https://lh4.googleusercontent.com/Rb9Z4uPL7u5dKLM1ZMrINQTv_e-ZFoAEKdqvfeW7FrAnnMYDRG0Dh-6wl4pT6EKI4GmbXxFJKgqkm9g7TzGfNhybkH9v05q5yOF5og6mULD8q3jzY-ZBUgFderKo1VPK87gEXCW09gf5FE4rAQ)
-    
-    * Click in ‘Tasks’ button![](https://lh5.googleusercontent.com/q8fL80u3NhoBExSrntAu77w1gVuusjum2A873gizjBstuXyuiFscnoOScDJalMU552o4LiwZ5_tqSRpZZ-yzF6wvzHQyRYMZgXryrzwe0s79X9AV2uB70n3Yvs_M-BfFzHyQTQ4-bkGZNpdozg) on the bottom horizontal bar and ensure that ‘commit all’ job finishes. Click on Close to exit out of the window.
-    ![](https://lh6.googleusercontent.com/0e_73oUxOEB1XE56HsNgPSLrI2ljHBXSCoCutpYjzheOhVxTkvCdLq8FleP7uLu6NvzYjR3MFWDdqlFYolwIa0GVF5xmmpmP5R14Wg3WWZKtHdWXKoJCPrZ8Ag9yzlX38FeAIWBpgF_wfc_i8A)
-    
-    * Ensure that all commit processes are completed by monitoring  ![](https://lh5.googleusercontent.com/q8fL80u3NhoBExSrntAu77w1gVuusjum2A873gizjBstuXyuiFscnoOScDJalMU552o4LiwZ5_tqSRpZZ-yzF6wvzHQyRYMZgXryrzwe0s79X9AV2uB70n3Yvs_M-BfFzHyQTQ4-bkGZNpdozg)
-
 68. Relaunch the attack by navigating to the SSH session on **att-app-server** and issue the command.
 
 ```
@@ -507,7 +385,7 @@ The policies will look like this.
 
 ![](https://lh4.googleusercontent.com/0JVCnNrWY1UKNo6i-Wrt5G1tqhFCoSse6LaecMiGL_cCWauu3gd0QP8x4DjEdED0pNYrefDmNdkgKE_zbJTLaN7DbqpvTlvMcRjY0ccbIbMCZxnhZ_xpCYxZNagRC4u93cBhOxIjtMDmtrlYCQ)
 
-70. Navigate back to Panorama > Monitor > Threat
+70. Navigate back to VM-Series UI > Monitor > Threat
 71. You will see that the Firewall detected the attack and blocked it.
 
 ![](https://lh4.googleusercontent.com/41HHZq3ngzA9AmbmiQUA1BqrTr68fF4vXgegZJruBsKcW3GMZq7TH1iJm0eGa3CwaeuBCmKysvM7SXuk3UsY3fYHgh7MwUmP2ix6c73EWFGIIDCi7-hP7qY2vzfa2gBqm4yTXykYvvzifqWfSw)
@@ -546,17 +424,6 @@ In this activity, we will use a policy that has both the profiles set to protect
 ![](https://lh6.googleusercontent.com/3DiOnz3Itg0DyW45G0XCEXPCgOCZ4551pWD3fmE4xyMbZxitXIaFPc9LSdvzjzqp3xmAfFxoLyemC2tZxvJ5Z9q87GsSrORMUZxikk1vM2Zc_hhk5ag386LSJBQ0QsU3RjC8qfJTIh32u0xb6g)
 
 78. Wait for status to complete.
-![](https://lh3.googleusercontent.com/QoB9oHT_ZIBcnRMLXT9OroCI9jEKS7HZ3vaGc0OdimDwt8LmdRPbngNz772koXuERGQo4KhuPmSh-rf7pi3D6TRw0Q-xs16go9iy5Y6RgzfSYgTA6BLx52Y1mlW3MsGTGvkXWVYCdfl2GJQh3A)
-    * If you see the message ‘Not all Commit-All jobs got triggered”, close the window.
-    * On the top right click on Commit again and select ‘Push to Devices’
-    ![](https://lh4.googleusercontent.com/Rb9Z4uPL7u5dKLM1ZMrINQTv_e-ZFoAEKdqvfeW7FrAnnMYDRG0Dh-6wl4pT6EKI4GmbXxFJKgqkm9g7TzGfNhybkH9v05q5yOF5og6mULD8q3jzY-ZBUgFderKo1VPK87gEXCW09gf5FE4rAQ)
-    
-    * Click in ‘Tasks’ button![](https://lh5.googleusercontent.com/q8fL80u3NhoBExSrntAu77w1gVuusjum2A873gizjBstuXyuiFscnoOScDJalMU552o4LiwZ5_tqSRpZZ-yzF6wvzHQyRYMZgXryrzwe0s79X9AV2uB70n3Yvs_M-BfFzHyQTQ4-bkGZNpdozg) on the bottom horizontal bar  and ensure that ‘commit all’ job finishes. Click on Close to exit out of the window.
-    ![](https://lh6.googleusercontent.com/0e_73oUxOEB1XE56HsNgPSLrI2ljHBXSCoCutpYjzheOhVxTkvCdLq8FleP7uLu6NvzYjR3MFWDdqlFYolwIa0GVF5xmmpmP5R14Wg3WWZKtHdWXKoJCPrZ8Ag9yzlX38FeAIWBpgF_wfc_i8A)
-
-    * Ensure that all commit processes are completed by monitoring the Tasks ![](https://lh5.googleusercontent.com/q8fL80u3NhoBExSrntAu77w1gVuusjum2A873gizjBstuXyuiFscnoOScDJalMU552o4LiwZ5_tqSRpZZ-yzF6wvzHQyRYMZgXryrzwe0s79X9AV2uB70n3Yvs_M-BfFzHyQTQ4-bkGZNpdozg)
-    ![](https://lh4.googleusercontent.com/eBte6FGrDCUszkyKNmS1232ZGpfOGxJbGPp2F2ULkU8Dc4QGQZMYFe8GMKFIGQKZYEjx8fEhujPlEI82CfaId26WHGagIM0kKE-5OHtM19pzKYzlrfRZLuPn-ba3tUPLKOdLX9SAnIVPiL41SQ)
-
 79. Relaunch the attack by navigating to the SSH session on **att-app-server** and issue the command.
 
 ```
@@ -604,18 +471,6 @@ We can use the App-ID for ldap and rmi-iiop to block all RMI and LDAP to or from
 ![](https://lh6.googleusercontent.com/3DiOnz3Itg0DyW45G0XCEXPCgOCZ4551pWD3fmE4xyMbZxitXIaFPc9LSdvzjzqp3xmAfFxoLyemC2tZxvJ5Z9q87GsSrORMUZxikk1vM2Zc_hhk5ag386LSJBQ0QsU3RjC8qfJTIh32u0xb6g)
 
 86. Wait for status to complete.
-
-![](https://lh3.googleusercontent.com/QoB9oHT_ZIBcnRMLXT9OroCI9jEKS7HZ3vaGc0OdimDwt8LmdRPbngNz772koXuERGQo4KhuPmSh-rf7pi3D6TRw0Q-xs16go9iy5Y6RgzfSYgTA6BLx52Y1mlW3MsGTGvkXWVYCdfl2GJQh3A)
-
-87. If you see the message ‘Not all Commit-All jobs got triggered”, close the window.
-    * On the top right click on Commit again and select ‘Push to Devices’
-    ![](https://lh4.googleusercontent.com/Rb9Z4uPL7u5dKLM1ZMrINQTv_e-ZFoAEKdqvfeW7FrAnnMYDRG0Dh-6wl4pT6EKI4GmbXxFJKgqkm9g7TzGfNhybkH9v05q5yOF5og6mULD8q3jzY-ZBUgFderKo1VPK87gEXCW09gf5FE4rAQ)
-
-    * Click in ‘Tasks’ button ![](https://lh5.googleusercontent.com/q8fL80u3NhoBExSrntAu77w1gVuusjum2A873gizjBstuXyuiFscnoOScDJalMU552o4LiwZ5_tqSRpZZ-yzF6wvzHQyRYMZgXryrzwe0s79X9AV2uB70n3Yvs_M-BfFzHyQTQ4-bkGZNpdozg) on the bottom horizontal bar  and ensure that ‘commit all’ job finishes. Click on Close to exit out of the window.
-    ![](https://lh6.googleusercontent.com/JrB8jyKPymcNypg-AehfNRRqDLrjREkgkbI_paBRe-1Oll56s6gI41QhBVAhoX5DlO43nJQLSIBKUGno-G89T8zuIKhhbP9bg_GGijyXGLsrmljK_VvdOd5pXI4ScHfqpBYhpq44T5Lpe3ud2Q)
-
-    * Ensure that all commit processes are completed by monitoring
-
 88. Relaunch the attack by navigating to the SSH session on **att-app-server** and issue the command.
 
 ```
@@ -634,3 +489,65 @@ We can use the App-ID for ldap and rmi-iiop to block all RMI and LDAP to or from
 ## Activity Final Thoughts
 
 As we conclude this session, you have familiarized yourself with building a policy model that provides multi-tier protection for your applications on AWS against Log4j, following best practices guidelines.
+
+# Appendix
+
+<a id="connecting_to_aws"></a>
+## Connecting to the AWS Instances
+
+As mentioned earlier, there are 2 types of keys provided to connect to the AWS EC2 instances; PEM and PPK.
+
+* If you are on a Mac system, you will be using ‘Terminal’ to connect to the devices via SSH. For this, click on the “Download PEM” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.pem”. 
+* If you are using a Windows laptop to access this lab, you will need to have a SSH application like PuTTY installed. In this case, click on the “Download PPK” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.ppk”.
+* Make sure to note the location where the file is downloaded. On a Mac, by default, it should be downloaded to “/Users/&lt;username>/Downloads”.
+
+We will be using the user ‘ec2-user’ as the username to login to these applications. We can login to the EC2 instances using the below methods.
+
+### On the AWS CloudShell
+
+* Navigate to the AWS CloudShell and run the below command to log in to the EC2 instance on the AWS environment. Make sure to replace the _&lt;instance-id>_ in the command below with the instance ID of the EC2 instance.
+
+```
+aws ec2-instance-connect ssh --instance-id <instance-id>
+```
+
+### Using the PEM file
+
+If connecting via the AWS EC2 console does not work, you could try the below two options as well.
+
+* Launch terminal on your MAC.
+* Navigate to the folder where the pem keys were downloaded to.
+
+```
+cd ~/Downloads
+```
+
+* Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below
+
+```
+chmod 400 qwikLABS-****.pem
+```
+
+* Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below.  Username is ‘ec2-user’. IP Address is the public IP address of the ‘qwikLABS-vul-app-server’ that we noted in the previous step.
+
+```
+ssh -i qwikLABS-****.pem ec2-user@<vul-app-public-ip>
+```
+
+For example:
+
+![](https://lh6.googleusercontent.com/ulQz4of2Lfn1iAsbmy9J4YXfXg3_UkbeEx7tRrjHu8uZJqTX6yQ5NTRUlzuKNvSYuwGldLCo6_8wOmUeBIrTsvBffE3Zf68iGRh5x34_UqlJe4fKgEN1rWlKYBKfBeGza0x4iyagGTlJO9jhoA)
+
+### Using the PPK file
+
+If you are using PuTTY to connect to the servers, after opening the putty, 
+
+* On the Category menu on the left, expand SSH and click on Auth.
+* In the field to select the Private key file for authentication, browse for the downloaded PPK file and select it.
+
+![](https://lh3.googleusercontent.com/aAAvPXmenQ-cHpAP6BzLKgKM6tXguUbnSkLc427HE8J8UsNSl9TlM4E2Q7TxQTGKRsF6B-BXpd2R6tbmLP1tmoj9v9B8NSGmqpOMCCz7RmQNc676n5Lmo088qYnHiUiVkNH4O-0uk2kyaHxxzA)
+
+* Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
+* Click “Open” to connect to the server.
+
+![](https://lh4.googleusercontent.com/wmz5MlxioKGCl8qp_kP9XFMkw-TPGuz6BvKrFsxolNeKNBUo5wDvDVoPMOX6OQlUyoIw4UX579VHkBdtpeA740jsXqawYvtaK2u32kj9K04MEw1HXCAl7qfOtQD7wKZ75Qbgg9nuFEpc_01W1g)
